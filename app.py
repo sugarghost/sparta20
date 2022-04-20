@@ -1,4 +1,4 @@
-# 방성민
+# 강돌이
 
 import hashlib
 import datetime
