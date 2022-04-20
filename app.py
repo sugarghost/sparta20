@@ -1,5 +1,4 @@
-# 김상선
-# 김민주
+# 방성민
 
 import hashlib
 import datetime
