@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- Webpage Title -->
+    <title>NewFlix</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/static/detail.css">
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+
+    <link rel="icon" href="/static/Netflix-logo.png">
+
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+    <style type="text/css">
+
+
+    </style>
+</head>
+
+<body>
+<header>
+    <div class="inner">
+        <a href="/home" class="logo">
+            <img src="/static/Netflix-logo.png" alt="logo">
+        </a>
+    </div>
+    {% if movieMainThumbnail %}
+    <div class="jw-title-clip-poster-play-button jw-title-clip-poster-play-button--backdrop"
+         style="background-image: url({{ movieMainThumbnail }}); height: 300px;">
+    </div>
+    {% else %}
+    <div class="jw-title-clip-poster-play-button jw-title-clip-poster-play-button--backdrop"
+         style="background-image: url({{ movieMainThumbnail }});">
+    </div>
+    {% endif %}
+
+</header>
+<div class="wrap">
+
+    <div class="container">
+        <div class="flex_item">
+            <div class="menu_item">
+                <div class="img_area">
+                    <img src={{ movieImage }} class="img-fluid"
+                         alt="Responsive image">
+                </div>
+            </div>
+            <div class="menu_item">
+                <div class="movie_info">
+                    <p style="font-size:50px">{{ movieTitle }}</p></br>
+                    <p>장르 : {{ movieGenre }} </p></br>
+                    <p>재생 시간 : {{ movieTime }} </p></br>
+                    <p>요약</br> {{ movieSummary }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="info">
+            <h1>재밌게 본 영화 후기를 남겨보세요</h1>
+        </div>
+        <div class="reviews">
+            <table class="table" id="reviewTable">
+                <colgroup>
+                    <col style="width:10%">
+                    <col style="width:45%">
+                    <col style="width:10%">
+                    <col style="width:15%">
+                    <col style="width:20%">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th scope="col" style="text-align: center">아이디</th>
+                    <th scope="col" style="text-align: center">리뷰</th>
+                    <th scope="col" style="text-align: center">별점</th>
+                    <th scope="col" style="text-align: center">작성시간</th>
+                    <th scope="col" style="text-align: center">삭제/수정</th>
+                </tr>
+                </thead>
+                <tbody id="reviews-box">
+                {% if reviews %}
+                {% for reviews in reviews %}
+                    <tr>
+                        <td style="text-align: center">{{ reviews.userId }}</td>
+                        <td style="text-align: left">{{ reviews.Review }}</td>
+                        <td style="text-align: center">{{ reviews.starValue }}</td>
+                        <td style="text-align: center">{{ reviews.nowDatetime }}</td>
+                        <td style="text-align: right">
+                            {% if reviews.userId  == TokenUserId %}
+                                <button type="button" class="btn btn-primary">수정</button>
+                                <button onclick="deleteReview()" id="deleteReview" type="button"
+                                        class="btn btn-primary">삭제
+                                </button></td>
+                            {% endif %}
+                    </tr>
+                    {% endfor %}
+                {% else %}
+
+                        <tr>
+                            <td style="text-align: center"></td>
+                            <td style="text-align: right; font-size:30px ">가장먼저 리뷰를 남겨보세요!!</td>
+                            <td style="text-align: center"></td>
+                            <td style="text-align: center"></td>
+                            <td style="text-align: right"></td>
+                        </tr>
+
+                {% endif %}
+                </tbody>
+            </table>
+            <div class="makeReview" id="makeReview">
+                <h3>리뷰 남기기</h3>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="bookReview"
+                           placeholder="리뷰 작성 영역">
+                    <div class="starpoint_wrap">
+                        <div class="starpoint_box">
+                            <label for="starpoint_1" class="label_star" title="1"><span class="blind">1점</span></label>
+                            <label for="starpoint_2" class="label_star" title="2"><span class="blind">2점</span></label>
+                            <label for="starpoint_3" class="label_star" title="3"><span class="blind">3점</span></label>
+                            <label for="starpoint_4" class="label_star" title="4"><span class="blind">4점</span></label>
+                            <label for="starpoint_5" class="label_star" title="5"><span class="blind">5점</span></label>
+                            <label for="starpoint_6" class="label_star" title="6"><span class="blind">6점</span></label>
+                            <label for="starpoint_7" class="label_star" title="7"><span class="blind">7점</span></label>
+                            <label for="starpoint_8" class="label_star" title="8"><span class="blind">8점</span></label>
+                            <label for="starpoint_9" class="label_star" title="9"><span class="blind">9점</span></label>
+                            <label for="starpoint_10" class="label_star" title="10"><span
+                                    class="blind">10점</span></label>
+                            <input type="radio" name="starpoint" id="starpoint_1" class="star_radio" value="1">
+                            <input type="radio" name="starpoint" id="starpoint_2" class="star_radio" value="2">
+                            <input type="radio" name="starpoint" id="starpoint_3" class="star_radio" value="3">
+                            <input type="radio" name="starpoint" id="starpoint_4" class="star_radio" value="4">
+                            <input type="radio" name="starpoint" id="starpoint_5" class="star_radio" value="5">
+                            <input type="radio" name="starpoint" id="starpoint_6" class="star_radio" value="6">
+                            <input type="radio" name="starpoint" id="starpoint_7" class="star_radio" value="7">
+                            <input type="radio" name="starpoint" id="starpoint_8" class="star_radio" value="8">
+                            <input type="radio" name="starpoint" id="starpoint_9" class="star_radio" value="9">
+                            <input type="radio" name="starpoint" id="starpoint_10" class="star_radio" value="10">
+                            <span class="starpoint_bg"></span>
+                        </div>
+                    </div>
+                    <div class="review">
+                        <button onclick="makeReview()" type="button" class="btn btn-primary">등록</button>
+                    </div>
+                </div>
+            </div>
+            <div id="updateReview">
+                <h3>리뷰 수정</h3>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="updateReviews"
+                           placeholder="리뷰 작성 영역">
+                    <div class="starpoint_wrap2">
+                        <div class="starpoint_box2">
+                            <label for="starpoint_11" class="label_star2" title="1"><span
+                                    class="blind">1점</span></label>
+                            <label for="starpoint_12" class="label_star2" title="2"><span
+                                    class="blind">2점</span></label>
+                            <label for="starpoint_13" class="label_star2" title="3"><span
+                                    class="blind">3점</span></label>
+                            <label for="starpoint_14" class="label_star2" title="4"><span
+                                    class="blind">4점</span></label>
+                            <label for="starpoint_15" class="label_star2" title="5"><span
+                                    class="blind">5점</span></label>
+                            <label for="starpoint_16" class="label_star2" title="6"><span
+                                    class="blind">6점</span></label>
+                            <label for="starpoint_17" class="label_star2" title="7"><span
+                                    class="blind">7점</span></label>
+                            <label for="starpoint_18" class="label_star2" title="8"><span
+                                    class="blind">8점</span></label>
+                            <label for="starpoint_19" class="label_star2" title="9"><span
+                                    class="blind">9점</span></label>
+                            <label for="starpoint_20" class="label_star2" title="10"><span
+                                    class="blind">10점</span></label>
+                            <input type="radio" name="starpoint" id="starpoint_11" class="star_radio2" value="1">
+                            <input type="radio" name="starpoint" id="starpoint_12" class="star_radio2" value="2">
+                            <input type="radio" name="starpoint" id="starpoint_13" class="star_radio2" value="3">
+                            <input type="radio" name="starpoint" id="starpoint_14" class="star_radio2" value="4">
+                            <input type="radio" name="starpoint" id="starpoint_15" class="star_radio2" value="5">
+                            <input type="radio" name="starpoint" id="starpoint_16" class="star_radio2" value="6">
+                            <input type="radio" name="starpoint" id="starpoint_17" class="star_radio2" value="7">
+                            <input type="radio" name="starpoint" id="starpoint_18" class="star_radio2" value="8">
+                            <input type="radio" name="starpoint" id="starpoint_19" class="star_radio2" value="9">
+                            <input type="radio" name="starpoint" id="starpoint_20" class="star_radio2" value="10">
+                            <span class="starpoint_bg2"></span>
+                        </div>
+                    </div>
+                    <div class="review">
+                        <button id="updateButton" type="button" class="btn btn-primary">수정</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#updateReview").hide();
+    });
+
+    function makeReview() {
+        let Review = $('#bookReview').val();
+        let starValue = $('input[name="starpoint"]:checked').val();
+        let movieTitle = "{{movieTitle}}";
+
+        $.ajax({
+            type: "POST",
+            url: "/review",
+            data: {Review: Review, starValue: starValue, movieTitle : movieTitle},
+            success: function (response) {
+                $('#bookReview').val("")
+                window.location.reload();
+            },
+            error: function (error) {
+                alert('리뷰, 별점 모두 등록해 주세요')
+            }
+        })
+    }
+
+    function deleteReview() {
+        $("#reviews-box tr").click(function () {
+            let tdArr = new Array();
+            tdArr = [];
+            let tr = $(this);
+            let td = tr.children();
+            td.each(function (i) {
+                tdArr.push(td.eq(i).text());
+            });
+
+            $.ajax({
+                type: "Delete",
+                url: "/review",
+                data: {userid: tdArr[0], review: tdArr[1], starValue: tdArr[2], writeTime: tdArr[3]},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload();
+                }
+            })
+        });
+    }
+
+    $("#reviews-box tr").click(function () {
+        let tdArr = new Array();
+        tdArr = [];
+        let tr = $(this);
+        let td = tr.children();
+        td.each(function (i) {
+            tdArr.push(td.eq(i).text());
+        });
+
+        $("#updateButton").click(function () {
+                let updateReview = $("#updateReviews").val();
+                let updateStarValue = $('input[name="starpoint"]:checked').val();
+                console.log("1111" + updateReview + updateStarValue);
+
+                $.ajax({
+                    type: "Put",
+                    url: "/review",
+                    data: {
+                        userid: tdArr[0],
+                        review: tdArr[1],
+                        starValue: tdArr[2],
+                        writeTime: tdArr[3],
+                        updateReview: updateReview,
+                        updateStarValue: updateStarValue
+                    },
+                    success: function (response) {
+                        alert(response['msg'])
+                        window.location.reload();
+                    }
+                })
+            }
+        )
+    })
+
+    $("#reviews-box tr td button:first-child").click(function () {
+        if ($(this).html() == '수정') {
+            $("#updateReview").show();
+            $("#makeReview").hide();
+            $("html, body").animate({scrollTop: document.body.scrollHeight}, "slow");
+            $(this).html('수정취소');
+        } else {
+            $("#updateReview").hide();
+            $("#makeReview").show();
+            $(this).html('수정');
+        }
+    })
+</script>
+</html>

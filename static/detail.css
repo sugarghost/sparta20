@@ -1,0 +1,348 @@
+* {
+    font-family: "Do Hyeon", sans-serif;
+    color: white;
+}
+
+h1,
+h3 {
+    text-align: center;
+}
+
+
+h5 {
+    display: inline;
+}
+
+p {
+    font-size: 18px;
+}
+
+.info {
+    margin-top: 210px;
+    margin-bottom: 20px;
+}
+
+.review {
+    text-align: center;
+}
+
+.reviews {
+    margin-top: 100px;
+}
+
+.img-fluid {
+    max-width: 80%;
+}
+
+body {
+    background-color: #141414;
+}
+
+img {
+    width: 700px;
+    height: 100px;
+}
+
+.container {
+    padding-top: 44px;
+    background-color: #141414;
+    padding-bottom: 100px;
+}
+
+.flex_item {
+    display: flex;
+
+    margin-bottom: 30px;
+}
+
+.logo img {
+    width: 100px;
+    height: 88px;
+    margin: 20px 0px 0px 20px;
+}
+
+.inner {
+    width: 100px;
+    background-color: #141414;
+    height: 100px;
+}
+
+.menu_item {
+    flex: 1;
+    height: auto;
+}
+
+.wrap {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #141414;
+    padding-bottom: 100px;
+}
+
+.starpoint_wrap {
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.starpoint_wrap2 {
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.starpoint_box {
+    position: relative;
+    background: url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 0 no-repeat;
+    font-size: 0;
+}
+
+.starpoint_box2 {
+    position: relative;
+    background: url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 0 no-repeat;
+    font-size: 0;
+}
+
+.starpoint_box .starpoint_bg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    background: url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 -20px no-repeat;
+    pointer-events: none;
+}
+
+.starpoint_box .label_star {
+    display: inline-block;
+    width: 10px;
+    height: 18px;
+    box-sizing: border-box;
+}
+
+.starpoint_box .star_radio {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.starpoint_box .star_radio:nth-of-type(1):hover ~ .starpoint_bg,
+.starpoint_box .star_radio:nth-of-type(1):checked ~ .starpoint_bg {
+    width: 10%;
+}
+
+.starpoint_box .star_radio:nth-of-type(2):hover ~ .starpoint_bg,
+.starpoint_box .star_radio:nth-of-type(2):checked ~ .starpoint_bg {
+    width: 20%;
+}
+
+.starpoint_box .star_radio:nth-of-type(3):hover ~ .starpoint_bg,
+.starpoint_box .star_radio:nth-of-type(3):checked ~ .starpoint_bg {
+    width: 30%;
+}
+
+.starpoint_box .star_radio:nth-of-type(4):hover ~ .starpoint_bg,
+.starpoint_box .star_radio:nth-of-type(4):checked ~ .starpoint_bg {
+    width: 40%;
+}
+
+.starpoint_box .star_radio:nth-of-type(5):hover ~ .starpoint_bg,
+.starpoint_box .star_radio:nth-of-type(5):checked ~ .starpoint_bg {
+    width: 50%;
+}
+
+.starpoint_box .star_radio:nth-of-type(6):hover ~ .starpoint_bg,
+.starpoint_box .star_radio:nth-of-type(6):checked ~ .starpoint_bg {
+    width: 60%;
+}
+
+.starpoint_box .star_radio:nth-of-type(7):hover ~ .starpoint_bg,
+.starpoint_box .star_radio:nth-of-type(7):checked ~ .starpoint_bg {
+    width: 70%;
+}
+
+.starpoint_box .star_radio:nth-of-type(8):hover ~ .starpoint_bg,
+.starpoint_box .star_radio:nth-of-type(8):checked ~ .starpoint_bg {
+    width: 80%;
+}
+
+.starpoint_box .star_radio:nth-of-type(9):hover ~ .starpoint_bg,
+.starpoint_box .star_radio:nth-of-type(9):checked ~ .starpoint_bg {
+    width: 90%;
+}
+
+.starpoint_box .star_radio:nth-of-type(10):hover ~ .starpoint_bg,
+.starpoint_box .star_radio:nth-of-type(10):checked ~ .starpoint_bg {
+    width: 100%;
+}
+
+
+.starpoint_wrap2 {
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.starpoint_box2 {
+    position: relative;
+    background: url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 0 no-repeat;
+    font-size: 0;
+}
+
+
+.starpoint_box2 .starpoint_bg2 {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    background: url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 -20px no-repeat;
+    pointer-events: none;
+}
+
+.starpoint_box2 .label_star2 {
+    display: inline-block;
+    width: 10px;
+    height: 18px;
+    box-sizing: border-box;
+}
+
+.starpoint_box2 .star_radio2 {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.starpoint_box2 .star_radio2:nth-of-type(1):hover ~ .starpoint_bg2,
+.starpoint_box2 .star_radio2:nth-of-type(1):checked ~ .starpoint_bg2 {
+    width: 10%;
+}
+
+.starpoint_box2 .star_radio2:nth-of-type(2):hover ~ .starpoint_bg2,
+.starpoint_box2 .star_radio2:nth-of-type(2):checked ~ .starpoint_bg2 {
+    width: 20%;
+}
+
+.starpoint_box2 .star_radio2:nth-of-type(3):hover ~ .starpoint_bg2,
+.starpoint_box2 .star_radio2:nth-of-type(3):checked ~ .starpoint_bg2 {
+    width: 30%;
+}
+
+.starpoint_box2 .star_radio2:nth-of-type(4):hover ~ .starpoint_bg2,
+.starpoint_box2 .star_radio2:nth-of-type(4):checked ~ .starpoint_bg2 {
+    width: 40%;
+}
+
+.starpoint_box2 .star_radio2:nth-of-type(5):hover ~ .starpoint_bg2,
+.starpoint_box2 .star_radio2:nth-of-type(5):checked ~ .starpoint_bg2 {
+    width: 50%;
+}
+
+.starpoint_box2 .star_radio2:nth-of-type(6):hover ~ .starpoint_bg2,
+.starpoint_box2 .star_radio2:nth-of-type(6):checked ~ .starpoint_bg2 {
+    width: 60%;
+}
+
+.starpoint_box2 .star_radio2:nth-of-type(7):hover ~ .starpoint_bg2,
+.starpoint_box2 .star_radio2:nth-of-type(7):checked ~ .starpoint_bg2 {
+    width: 70%;
+}
+
+.starpoint_box2 .star_radio2:nth-of-type(8):hover ~ .starpoint_bg2,
+.starpoint_box2 .star_radio2:nth-of-type(8):checked ~ .starpoint_bg2 {
+    width: 80%;
+}
+
+.starpoint_box2 .star_radio2:nth-of-type(9):hover ~ .starpoint_bg2,
+.starpoint_box2 .star_radio2:nth-of-type(9):checked ~ .starpoint_bg2 {
+    width: 90%;
+}
+
+.starpoint_box2 .star_radio2:nth-of-type(10):hover ~ .starpoint_bg2,
+.starpoint_box2 .star_radio2:nth-of-type(10):checked ~ .starpoint_bg2 {
+    width: 100%;
+}
+
+
+.blind {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+header {
+    width: 1200px;
+    margin: auto;
+}
+
+.movie_info {
+    margin-top: 85px;
+}
+
+.makeReview {
+    margin-top: 50px;
+}
+
+.img_area {
+    height: 300px;
+    line-height: 530px;
+}
+
+.img_area img {
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 1200px) {
+    .info {
+        margin-top: 100px;
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+    .info {
+        margin-top: 50px;
+    }
+
+    .container {
+        padding-top: 0;
+    }
+
+    header {
+        width: 100%;
+        margin: auto;
+    }
+
+    .movie_info {
+        margin-top: 30px;
+    }
+
+    .table td, .table th {
+        padding: 0.25rem;
+    }
+}
+
+@media screen and (max-width: 992px) and (min-width: 1200px) {
+    .info {
+        margin-top: 200px;
+    }
+
+    .container {
+        padding-top: 0;
+    }
+
+    header {
+        width: 100%;
+        margin: auto;
+    }
+
+    .movie_info {
+        margin-top: 30px;
+    }
+}
+
