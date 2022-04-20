@@ -174,7 +174,7 @@ def login():
             # 'exp' : datetime.utcnow() + timedelta(seconds = 30) #test
             # 'exp' : datetime.utcnow() + timedelta(seconds = 5) #test
         }
-        token = jwt.encode(payload,SECRET_KEY, algorithm='HS256').decode('utf-8')
+        token = jwt.encode(payload,SECRET_KEY, algorithm='HS256')
 
 
         from home import save_movies
