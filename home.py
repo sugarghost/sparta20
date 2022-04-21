@@ -25,6 +25,7 @@ def GetJwtId():
 
 
 # home 라우터 (컨텐츠 디비에서 가져온 후 보여줌)
+# 사용자가 로그인 이후 도착하는 함수
 @home.route('/home')
 def main():
     # r = requests.get('http://127.0.0.1:5000/movies')
@@ -36,6 +37,7 @@ def main():
 
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        # 토근에 이상이 없는 경우 home.html 페이지를 로딩함
         return render_template('home.html')
 
     except jwt.ExpiredSignatureError:
@@ -64,10 +66,13 @@ def read_movies():
     fav_list = fav['fav']
     title = []
     tmp = []
+    # DB에 ID로 정렬이 안되어있어서 제목을 기반으로 배열을 만듬
     for i in movies:
         title.append(i['movie_title'])
+    # 만들어진 배열에서 즐겨찾기 된 제목을 기반으로 검색을 진행해 검색된 리스트를 새롭게 생성
     for i in fav_list:
         tmp.append(title.index(i))
+    # 검색된 영화 데이터와 즐겨찾기 데이터가 json으로 변환되어 전달됨
     return jsonify(
         {'all_movies': movies, "fav": tmp}
     )

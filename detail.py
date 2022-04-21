@@ -23,16 +23,19 @@ db = client.netflix_comment
 
 detail = Blueprint('detail', __name__)
 
-
+# 사용자가 home 화면에서 영화를 클릭 시 호출되는 기능
 @detail.route('/detail/<category>/<movie_name>')
 def main(movie_name, category):
     from app import GetJwtId
     TokenUserId = GetJwtId()
 
+    #파이썬에서 전달된 한글값으로 url 생성시 오류가 나기 때문에 퍼센트 인코딩을 진행
     movie_name = urllib.parse.quote(movie_name, safe='')
     category = parse.quote(category)
+    # 처리된 퍼센트 인코딩으로 링크를 연결함
     url = f'https://www.justwatch.com/kr/{category}/{movie_name}'
 
+    #영화에 대한 설명을 가져오기 위해 생성한 url 정보로 사이트를 접근
     data = requests.get(url)
     soup = BeautifulSoup(data.text, 'html.parser')
 
@@ -41,6 +44,7 @@ def main(movie_name, category):
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.user.find_one({"id": payload['id']})
 
+        #변수를 global로 만들어 다른 함수에서도 현재 영화 제목을 참조할 수 있도록 설정
         global movieTitle
         movieTitle = soup.select_one(
             '#base > div.jw-info-box > div > div.jw-info-box__container-content > div:nth-child(2) > div.title-block__container > div.title-block > div').text
@@ -123,8 +127,10 @@ def main(movie_name, category):
         else:
             movieSummary = ""
 
+        #현재 참조중인 영화 제목에 연결된 리뷰를 불러옴
         read_reviews()
         
+        # 과정중에 참조한 데이터들을 전부 묶어서 detail.html 페이지를 불러줌
         return render_template('detail.html', TokenUserId=TokenUserId, movieTitle=movieTitle, movieGenre=movieGenre,
                                movieTime=movieTime,
                                movieSummary=movieSummary, movieImage=movieImage,movieMainThumbnail=movieMainThumbnail, reviews=reviews)

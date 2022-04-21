@@ -15,8 +15,10 @@ from detail import detail
 #암호화 키 / JWT 토큰을 사용할때 쓰는 비밀문자열
 SECRET_KEY = 'sparta20'
 
+# DB 연결 구문(현재 김윤교 팀장 서버로 연결됨)
 client = MongoClient('mongodb+srv://test:sparta@cluster0.2rz7w.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=certifi.where())
 # client = MongoClient('localhost', 27017)
+# DB에 연결시 사용할 데이터베이스 명
 db = client.netflix_comment
 app = Flask(__name__)
 
@@ -42,17 +44,25 @@ def token_check():
 #메인페이지 로그인정보가있다면 홈으로 이동 아니면 로그인이동
 @app.route('/')
 def main_page():
+    # 브라우저에 mytoken으로 저장되어있는 쿠키 데이터를 가져옴
     token_receive = request.cookies.get('mytoken')
     try:
+        # pyjwt를 사용해 가져온 token_receive 값을 복호화해 저장된 ID를 추출함
+        # SECRET_KEY는 복호화시 사용 될 비밀키, 복호화 방식은 HS256 방식 사용
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        #복호화 된 사용자 ID를 이용해 DB 상으로 일치하는 아이디가 존재하는지 확인
         user_info = db.User.find_one({"id": payload['id']})
 
+        # 이상 없이 복호화가 완료 됬다면 home 패키지의 main 함수로 이동
         # return render_template('detail.html')
         return redirect(url_for('home.main'))
 
+    # 토큰에는 만료 시간이 별도로 존재하며, 만약 만료가 되었다면 메세지와 함꼐 login_page로 이동
+    # url_for(url에 연결된 함수명, 전달할 인자값)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login_page", msg="로그인 시간이 만료되었습니다."))
 
+    # 복호화 과정에서 문제가 발생했다면, 토큰이 존재하지 않는다고 판단해 메세지와 함꼐 login_page로 이동
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login_page", msg="로그인 정보가 존재하지 않습니다."))
 
@@ -78,26 +88,30 @@ def GetJwtId():
 #     except jwt.exceptions.DecodeError:
 #         return redirect(url_for("login_page", msg="로그인 정보가 존재하지 않습니다."))
 
-
-@app.route('/')
-def hello_world():  # put application's code here
-    return redirect(url_for('login_page'))
+# 사용 안하는 듯 해서 비활성화
+# @app.route('/')
+# def hello_world():  # put application's code here
+#     return redirect(url_for('login_page'))
 
 # 로그인라우터
 @app.route('/login', methods=['GET'])
 def login_page():
     print('로그인 페이지 접속')
 
+    # login_page가 호출 되면서 전달된 인자값 중 msg 라는 이름을 가진 값을 변수에 보관
     msg = request.args.get("msg")
     token_receive = request.cookies.get('mytoken')
 
     try:
+        # 초기 경로로 접근할 때와 같이 저장된 쿠키를 기반으로 사용자 검색
         payload = jwt.decode(token_receive,SECRET_KEY,algorithms=['HS256'])
         user_info = db.User.find_one({"id":payload['id']})
         return redirect(url_for('home.main'))
         # return redirect(url_for('home_router.home'))
 
         # return redirect(url_for('home.main'))
+    # 기존 초기 메뉴에서는 메시지와 함께 login_page 함수가 호출됬다면 이번에는 함수가 아닌 html 페이지가 호출됨
+    # templates 폴더에 login.html 페이지를 로딩하며 msg를 같이 전달함
     except jwt.ExpiredSignatureError:
         return render_template('login.html',msg=msg)
     except jwt.exceptions.DecodeError:

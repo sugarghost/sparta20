@@ -79,6 +79,8 @@
                     success: function (response) {
 
                         alert(response['msg'] + '님 회원 가입을 축하드립니다')
+                        //회원가입이 완료되면 /login 주소로 이동되지만, 쿠키가 생성되어있음
+                        // login 주소에서 생성된 쿠키 정보를 확인한 뒤에 home 패키지의 main 함수로 이동됨
                         window.location.href = '/login'
 
 
@@ -111,14 +113,17 @@
                     },
                     success: function (response) {
                         if (response['result'] == 'success') {
+                            // 로그인 결과가 성공적인 경우 mytoken이라는 이름에 서버에서 전달된 token이라는 데이터를 이용해 쿠키를 생성
                             $.cookie('mytoken', response['token']
                             , {
+                                //쿠키 적용 대상 사이트는 현재 사이트 기반으로 전체 하위 경로까지 포함
                                 path: '/'
                             });
                             // alert('로그인 완료');
                             // 로그인 후 이동할 페이지
                             window.location.replace("/save_movies")
                         } else {
+                            //실패 한 경우 서버에서 전달된 msg를 출력함
                             alert(response['msg'])
                         }
                     }
@@ -127,7 +132,9 @@
             }
         }
 
-
+        //현재 로그인 폼에는 register라는 이름으로 클래스가 들어가 있음
+        //아래 Onregister 기능을 확인하면 register라는 이름을 가진 대상으로 사용자 액션에 따라 registers 라는 이름을 추가했다가 지웠다를 반복
+        //login.css에 register와 registers에 위치 정보가 다르고 register에 애니메이션 효과가 적용되어 있기에 위치 정보를 바꾸는 것으로 애니메이션 효과를 주기 위함임
         let registers = document.getElementsByClassName('register');
 
         //회원가입 페이지 버튼
@@ -137,6 +144,9 @@
                 for (let i = 0; i < registers.length; i++) {
                     registers[i].classList.add('registers');
                 }
+
+                //login-btn은 상태 값에 따라서 회원가입 또는 로그인 동작을 함
+                //register-btn은 상태 값에 따라서 회원가입 화면 활성화, 비활성화를 반복함
                 $('#register-btn').text("취소");
                 $('#login-btn').text("회원가입");
 
@@ -173,6 +183,8 @@
                         $('#id_input').focus();
                     } else {
                         alert('사용 가능한 아이디 입니다!')
+                        //사용 가능한 아이디가 들어온 경우, dup_before 클래스를 제거함
+                        //dup_before 클래스는 다른 함수에서 회원가입 가능여부를 판별할 때 사용
                         $('#id_input').removeClass("dup_before");
                         $('#pwd_input1').focus();
 
