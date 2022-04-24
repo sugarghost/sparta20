@@ -116,6 +116,7 @@ def save_movies():
             'movie_image': src,
             'href': href_tag,
             'star': star,
+            'uid': title.encode('utf-8').hex()[:10]
         }
 
         db.movie.insert_one(doc)

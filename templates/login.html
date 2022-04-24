@@ -64,6 +64,13 @@
                     return;
                 }
 
+                //비밀번호 유효성 검사 체크
+                var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+                if (!pwdCheck.test(pwd)) {
+                    alert("비밀번호는 영문자+숫자+특수문자 조합으로 8자이상 입력하세요.");
+                    $('#pw_input').focus();
+                    return;
+                }
 
                 //비밀번호 체크 확인
                 if (pwd != pwc) {
