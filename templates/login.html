@@ -11,6 +11,7 @@
 
     <!--    Custom css 추가-->
     <link rel="stylesheet" href="../static/login.css">
+    <link rel="stylesheet" href="../static/neflix.css">
 
     <!--jquery cdn추가-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -18,23 +19,27 @@
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
 
+    <!-- Bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+
     <!--cookie cdn추가-->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <!--    페이지 아이콘-->
 
     <link rel="icon" href="../static/Netflix-logo.png">
 
     <!--js-->
     <script type="text/javascript">
-
         let btntoogle = false
 
         //로그인 시 엔터로 로그인 버튼 입력
-        function Entertologin(){
-            if(!btntoogle)
+        function Entertologin() {
+            if (!btntoogle)
                 login()
         }
-
 
 
         // 로그인 버튼겸 회원가입버튼
@@ -115,10 +120,10 @@
                         if (response['result'] == 'success') {
                             // 로그인 결과가 성공적인 경우 mytoken이라는 이름에 서버에서 전달된 token이라는 데이터를 이용해 쿠키를 생성
                             $.cookie('mytoken', response['token']
-                            , {
-                                //쿠키 적용 대상 사이트는 현재 사이트 기반으로 전체 하위 경로까지 포함
-                                path: '/'
-                            });
+                                , {
+                                    //쿠키 적용 대상 사이트는 현재 사이트 기반으로 전체 하위 경로까지 포함
+                                    path: '/'
+                                });
                             // alert('로그인 완료');
                             // 로그인 후 이동할 페이지
                             window.location.replace("/save_movies")
@@ -198,54 +203,348 @@
     </script>
 </head>
 <body>
-
-<!--    헤드 로고-->
-<header>
-    <div class="inner">
-        <a href="./login" class="logo">
-            <img src="../static/Netflix-logo.png" alt="logo">
-        </a>
-
-
-
-    </div>
-</header>
->
 <!--로그인 섹션-->
 <section class="section">
-    <div class="container">
-        <!--    로그인 박스-->
-        <div id="login-box">
-            <!--            웹사이트 제목-->
-            <h1>Netflix Comment</h1>
-            <div class="mb-3 register" id="text-id">
-                <label for="exampleInputEmail1" class="form-label"> </label>
-                <input type="text" class="form-control dup_before" id="id_input" aria-describedby="emailHelp"
-                       placeholder="아이디">
-                <div class="register-id-btn register">
-                    <button type="submit" onclick="id_dup_check()" class="btn btn-danger">중복확인</button>
-                </div>
-            </div>
-            <div class="mb-3">
-                <input type="password"  onkeypress="if(event.keyCode==13){Entertologin();}" class="form-control" id="pw_input" placeholder="비밀번호">
-            </div>
-            <!--회원가입시 등장-->
-            <div class="register">
-                <div class="mb-3">
-                    <input type="password"   id="pwCheck_input" class="form-control" placeholder="비밀번호 확인">
-                </div>
-            </div>
+    <div id="appMountPoint">
+        <div class="basicLayout">
+            <div class="netflix-sans-font-loaded">
+                <div class="our-story-desktop-framework">
+                    <div>
+                        <div class="lang-selector-test our-story-container our-story-extended-diacritics" dir="ltr">
+                            <div class="our-story-header-wrapper">
+                                <div class="our-story-header" data-uia-nmhp="our-story-header">
+                                    <span class="our-story-logo">
 
-            <!--버튼-->
-            <div class="inner-btn">
-                <div class="register">
-                    <button id="login-btn" onclick="login()" type="submit" class="btn btn-danger">로그인</button>
-                    <button id="register-btn" onclick="Onregister()" type="submit" class="btn btn-danger">회원가입</button>
+                                            <a href="./login" class="logo">
+                                                <img src="../static/Netflix-logo.png" alt="logo">
+                                            </a>
+                                    </span>
+                                    <div class="lang-selection-container" id="lang-switcher">
+                                        <div data-uia="language-picker-header+container" class="ui-select-wrapper">
+                                            <label for="lang-switcher-header-select" class="ui-label">
+                                                <span class="ui-label-text">언어 선택</span>
+                                            </label>
+                                            <div class="select-arrow medium prefix globe"><select
+                                                    data-uia="language-picker-header" class="ui-select medium"
+                                                    id="lang-switcher-header-select" tabindex="0"
+                                                    placeholder="lang-switcher">
+                                                <option selected="" lang="ko" value="/kr/" data-language="ko"
+                                                        data-country="KR">한국어
+                                                </option>
+                                                <option lang="en" value="/kr-en/" data-language="en" data-country="KR">
+                                                    English
+                                                </option>
+                                            </select></div>
+                                        </div>
+                                    </div>
+                                    <a href="/login" class="btn btn-danger" data-uia="header-login-link">로그인</a></div>
+                            </div>
+                            <div class="our-story-cards" data-uia-nmhp="our-story-cards">
+                                <div class="our-story-card hero-card hero_fuji vlv" data-uia-nmhp="hero_fuji"
+                                     data-uia="our-story-card">
+                                    <div class="our-story-card-background">
+                                        <div class="concord-img-wrapper" data-uia="concord-img-wrapper"
+                                             style="height: 780.984px;"><img class="concord-img vlv-creative"
+                                                                             src="https://assets.nflxext.com/ffe/siteui/vlv3/59e045df-814d-4342-bf9d-e62ba23e916a/f677df8f-1679-4877-8191-f8824ed9c6bd/KR-ko-20220418-popsignuptwoweeks-perspective_alpha_website_small.jpg"
+                                                                             srcset="https://assets.nflxext.com/ffe/siteui/vlv3/59e045df-814d-4342-bf9d-e62ba23e916a/f677df8f-1679-4877-8191-f8824ed9c6bd/KR-ko-20220418-popsignuptwoweeks-perspective_alpha_website_small.jpg 1000w, https://assets.nflxext.com/ffe/siteui/vlv3/59e045df-814d-4342-bf9d-e62ba23e916a/f677df8f-1679-4877-8191-f8824ed9c6bd/KR-ko-20220418-popsignuptwoweeks-perspective_alpha_website_medium.jpg 1500w, https://assets.nflxext.com/ffe/siteui/vlv3/59e045df-814d-4342-bf9d-e62ba23e916a/f677df8f-1679-4877-8191-f8824ed9c6bd/KR-ko-20220418-popsignuptwoweeks-perspective_alpha_website_large.jpg 1800w"
+                                                                             alt="">
+                                            <div class="concord-img-gradient"></div>
+                                        </div>
+                                    </div>
+                                    <div class="our-story-card-text"><h1 id="" class="our-story-card-title"
+                                                                         data-uia="hero-title">Netflix Comment</h1>
+                                        <h2 id="" class="our-story-card-subtitle" data-uia="our-story-card-subtitle">다양한
+                                            영화를 검색해보세요.</h2>
+                                        <div id="login-box">
+                                            <div class="mb-3 register" id="text-id">
+                                                <label for="exampleInputEmail1" class="form-label"> </label>
+                                                <input type="text" class="form-control dup_before" id="id_input"
+                                                       aria-describedby="emailHelp"
+                                                       placeholder="아이디">
+                                                <div class="register-id-btn register">
+                                                    <button type="submit" onclick="id_dup_check()"
+                                                            class="btn btn-danger">중복확인
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <input type="password"
+                                                       onkeypress="if(event.keyCode==13){Entertologin();}"
+                                                       class="form-control"
+                                                       id="pw_input" placeholder="비밀번호">
+                                            </div>
+                                            <!--회원가입시 등장-->
+                                            <div class="register">
+                                                <div class="mb-3">
+                                                    <input type="password" id="pwCheck_input" class="form-control"
+                                                           placeholder="비밀번호 확인">
+                                                </div>
+                                            </div>
+
+                                            <!--버튼-->
+                                            <div class="inner-btn">
+                                                <div class="register">
+                                                    <button id="login-btn" onclick="login()" type="submit"
+                                                            class="btn btn-danger">로그인
+                                                    </button>
+                                                    <button id="register-btn" onclick="Onregister()" type="submit"
+                                                            class="btn btn-danger">회원가입
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h3 id="" class="our-story-card-disclaimer"
+                                            data-uia="our-story-card-disclaimer"></h3></div>
+                                    <div class="center-pixel" style="position:absolute"></div>
+                                </div>
+                                <div class="our-story-card animation-card watchOnTv" data-uia-nmhp="watchOnTv"
+                                     data-uia="our-story-card">
+                                    <div class="animation-card-container">
+                                        <div class="our-story-card-text"><h1 id="" class="our-story-card-title"
+                                                                             data-uia="animation-card-title">TV로
+                                            즐기세요.</h1>
+                                            <h2 id="" class="our-story-card-subtitle"
+                                                data-uia="our-story-card-subtitle">스마트
+                                                핸드폰으로 접속 하신 뒤 TV로 연결해보세요.</h2></div>
+                                        <div class="our-story-card-img-container">
+                                            <div class="our-story-card-animation-container"><img alt=""
+                                                                                                 class="our-story-card-img"
+                                                                                                 src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/tv.png"
+                                                                                                 data-uia="our-story-card-img">
+                                                <div class="our-story-card-animation">
+                                                    <video class="our-story-card-video" autoplay="" playsinline=""
+                                                           muted=""
+                                                           loop="">
+                                                        <source src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-tv-0819.m4v"
+                                                                type="video/mp4">
+                                                    </video>
+                                                    <div class="our-story-card-animation-text"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="center-pixel" style="position:absolute"></div>
+                                    </div>
+                                </div>
+                                <div class="our-story-card animation-card downloadAndWatch flipped"
+                                     data-uia-nmhp="downloadAndWatch" data-uia="our-story-card">
+                                    <div class="animation-card-container">
+                                        <div class="our-story-card-text"><h1 id="" class="our-story-card-title"
+                                                                             data-uia="animation-card-title">즐겨 보는 콘텐츠를
+                                            저장해
+                                            오프라인으로 시청하세요.</h1>
+                                            <h2 id="" class="our-story-card-subtitle"
+                                                data-uia="our-story-card-subtitle">
+                                                표지 이미지 만이라도 저장해보세요.</h2></div>
+                                        <div class="our-story-card-img-container">
+                                            <div class="our-story-card-animation-container"><img alt=""
+                                                                                                 class="our-story-card-img"
+                                                                                                 src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/mobile-0819.jpg"
+                                                                                                 data-uia="our-story-card-img">
+                                                <div class="our-story-card-animation">
+                                                    <div class="our-story-card-animation-image"><img alt=""
+                                                                                                     src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/boxshot.png">
+                                                    </div>
+                                                    <div class="our-story-card-animation-text">
+                                                        <div id="" class="text-0" data-uia="">기묘한 개발 이야기</div>
+                                                        <div id="" class="text-1" data-uia="">영상 빼고 저장 중...</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="center-pixel" style="position:absolute"></div>
+                                    </div>
+                                </div>
+                                <div class="our-story-card animation-card watchOnDevice" data-uia-nmhp="watchOnDevice"
+                                     data-uia="our-story-card">
+                                    <div class="animation-card-container">
+                                        <div class="our-story-card-text"><h1 id="" class="our-story-card-title"
+                                                                             data-uia="animation-card-title">다양한 디바이스에서
+                                            시청하세요.</h1>
+                                            <h2 id="" class="our-story-card-subtitle"
+                                                data-uia="our-story-card-subtitle">각종
+                                                사이트를 스마트폰, 태블릿, 노트북, TV에서 무제한으로 접속하세요. 추가 요금이 전혀 없습니다.</h2></div>
+                                        <div class="our-story-card-img-container">
+                                            <div class="our-story-card-animation-container"><img alt=""
+                                                                                                 class="our-story-card-img"
+                                                                                                 src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/device-pile.png"
+                                                                                                 data-uia="our-story-card-img">
+                                                <div class="our-story-card-animation">
+                                                    <video class="our-story-card-video" autoplay="" playsinline=""
+                                                           muted=""
+                                                           loop="">
+                                                        <source src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-devices.m4v"
+                                                                type="video/mp4">
+                                                    </video>
+                                                    <div class="our-story-card-animation-text"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="center-pixel" style="position:absolute"></div>
+                                    </div>
+                                </div>
+                                <div class="our-story-card animation-card kidsValueProp flipped"
+                                     data-uia-nmhp="kidsValueProp" data-uia="our-story-card">
+                                    <div class="animation-card-container">
+                                        <div class="our-story-card-text"><h1 id="" class="our-story-card-title"
+                                                                             data-uia="animation-card-title">어린이 전용 프로필을
+                                            만들어
+                                            보세요.</h1>
+                                            <h2 id="" class="our-story-card-subtitle"
+                                                data-uia="our-story-card-subtitle">
+                                                아직 기능은 없습니다..</h2>
+                                        </div>
+                                        <div class="our-story-card-img-container">
+                                            <div class="our-story-card-animation-container"><img alt=""
+                                                                                                 class="our-story-card-img"
+                                                                                                 src="https://occ-0-325-993.1.nflxso.net/dnm/api/v6/19OhWN2dO19C9txTON9tvTFtefw/AAAABTyynLTvOBU46RmBnCIPyjAryrXCZKImpoXdp7Mz54jVGKnBQ1X84bzR-3vtD-RA4uu2b1FjrDgfxE6KElG14WAXW19X.png?r=acf"
+                                                                                                 data-uia="our-story-card-img">
+                                                <div class="our-story-card-animation">
+                                                    <div class="our-story-card-animation-text"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="center-pixel" style="position:absolute"></div>
+                                    </div>
+                                </div>
+                                <div class="our-story-card faq-card" data-uia-nmhp="faq" data-uia="our-story-card"
+                                     id="faq">
+                                    <div class="our-story-card-text"><h1 id="" class="our-story-card-title"
+                                                                         data-uia="faq-title">자주 묻는 질문</h1>
+                                        <ul class="faq-list">
+                                            <li class="faq-list-item" data-uia-nmhp="faq-list-item"
+                                                data-uia-faq="what_is_netflix">
+                                                <button class="faq-question" type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseAnswer1" aria-expanded="false"
+                                                        aria-controls="collapseAnswer1">
+                                                    이 사이트는 무엇인가요?
+                                                    <svg id="thin-x" viewBox="0 0 26 26"
+                                                         class="svg-icon svg-icon-thin-x svg-closed" focusable="true">
+                                                        <path d="M10.5 9.3L1.8 0.5 0.5 1.8 9.3 10.5 0.5 19.3 1.8 20.5 10.5 11.8 19.3 20.5 20.5 19.3 11.8 10.5 20.5 1.8 19.3 0.5 10.5 9.3Z"></path>
+                                                    </svg>
+                                                </button>
+                                                <div class="faq-answer collapse" id="collapseAnswer1">
+                                                    <span id="" data-uia="">기존에 존재한 프로젝트를 기반으로 연습하는 테스트 사이트 입니다.</span>
+                                                </div>
+                                            </li>
+                                            <li class="faq-list-item" data-uia-nmhp="faq-list-item" data-uia-faq="cost">
+                                                <button class="faq-question" type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseAnswer2" aria-expanded="false"
+                                                        aria-controls="collapseAnswer2">이용 요금은 얼마인가요?
+                                                    <svg id="thin-x" viewBox="0 0 26 26"
+                                                         class="svg-icon svg-icon-thin-x svg-closed" focusable="true">
+                                                        <path d="M10.5 9.3L1.8 0.5 0.5 1.8 9.3 10.5 0.5 19.3 1.8 20.5 10.5 11.8 19.3 20.5 20.5 19.3 11.8 10.5 20.5 1.8 19.3 0.5 10.5 9.3Z"></path>
+                                                    </svg>
+                                                </button>
+                                                <div class="faq-answer collapse" id="collapseAnswer2">
+                                                    <span id="" data-uia="">무료지만 가능한 많이 받고 싶습니다.</span>
+                                                </div>
+                                            </li>
+                                            <li class="faq-list-item" data-uia-nmhp="faq-list-item"
+                                                data-uia-faq="where_to_watch">
+                                                <button class="faq-question" type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseAnswer3" aria-expanded="false"
+                                                        aria-controls="collapseAnswer3">어디에서 사용할 수 있나요?
+                                                    <svg id="thin-x" viewBox="0 0 26 26"
+                                                         class="svg-icon svg-icon-thin-x svg-closed" focusable="true">
+                                                        <path d="M10.5 9.3L1.8 0.5 0.5 1.8 9.3 10.5 0.5 19.3 1.8 20.5 10.5 11.8 19.3 20.5 20.5 19.3 11.8 10.5 20.5 1.8 19.3 0.5 10.5 9.3Z"></path>
+                                                    </svg>
+                                                </button>
+                                                <div class="faq-answer collapse" id="collapseAnswer3">
+                                                    <span id="" data-uia="">집 안방에서 인터넷 키고 사용하시면 됩니다.</span>
+                                                </div>
+                                            </li>
+                                            <li class="faq-list-item" data-uia-nmhp="faq-list-item"
+                                                data-uia-faq="cancel">
+                                                <button class="faq-question" type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseAnswer4" aria-expanded="false"
+                                                        aria-controls="collapseAnswer4">회원가입 탈퇴하려면 어떻게 하나요?
+                                                    <svg id="thin-x" viewBox="0 0 26 26"
+                                                         class="svg-icon svg-icon-thin-x svg-closed" focusable="true">
+                                                        <path d="M10.5 9.3L1.8 0.5 0.5 1.8 9.3 10.5 0.5 19.3 1.8 20.5 10.5 11.8 19.3 20.5 20.5 19.3 11.8 10.5 20.5 1.8 19.3 0.5 10.5 9.3Z"></path>
+                                                    </svg>
+                                                </button>
+                                                <div class="faq-answer collapse" id="collapseAnswer4">
+                                                    <span id="" data-uia="">탈퇴 기능이 없으니 만들때까지 기다리시면 됩니다.</span>
+                                                </div>
+                                            </li>
+                                            <li class="faq-list-item" data-uia-nmhp="faq-list-item"
+                                                data-uia-faq="what_to_watch_nft">
+                                                <button class="faq-question" type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseAnswer5" aria-expanded="false"
+                                                        aria-controls="collapseAnswer5">이 사이트에선 어떤 콘텐츠를 시청할 수 있나요?
+                                                    <svg id="thin-x" viewBox="0 0 26 26"
+                                                         class="svg-icon svg-icon-thin-x svg-closed" focusable="true">
+                                                        <path d="M10.5 9.3L1.8 0.5 0.5 1.8 9.3 10.5 0.5 19.3 1.8 20.5 10.5 11.8 19.3 20.5 20.5 19.3 11.8 10.5 20.5 1.8 19.3 0.5 10.5 9.3Z"></path>
+                                                    </svg>
+                                                </button>
+                                                <div class="faq-answer collapse" id="collapseAnswer5"><span id=""
+                                                                                                            data-uia="">시청 기능은 없고 표지는 볼 수 있습니다.</span>
+                                                </div>
+                                            </li>
+                                            <li class="faq-list-item" data-uia-nmhp="faq-list-item"
+                                                data-uia-faq="kids_value_prop">
+                                                <button class="faq-question" type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseAnswer6" aria-expanded="false"
+                                                        aria-controls="collapseAnswer6">아이들이 이 사이트를 봐도 좋을까요?
+                                                    <svg id="thin-x" viewBox="0 0 26 26"
+                                                         class="svg-icon svg-icon-thin-x svg-closed" focusable="true">
+                                                        <path d="M10.5 9.3L1.8 0.5 0.5 1.8 9.3 10.5 0.5 19.3 1.8 20.5 10.5 11.8 19.3 20.5 20.5 19.3 11.8 10.5 20.5 1.8 19.3 0.5 10.5 9.3Z"></path>
+                                                    </svg>
+                                                </button>
+                                                <div class="faq-answer collapse" id="collapseAnswer6"><span id=""
+                                                                                                            data-uia="">봐도 할게 없으니 상관없다고 생각합니다.</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="center-pixel" style="position:absolute"></div>
+                                </div>
+                                <div class="our-story-card card-contents footer-card our-story-card-no-border"
+                                     style="position:relative" data-uia-nmhp="footer" data-uia="our-story-card">
+                                    <div class="site-footer-wrapper centered dark">
+                                        <div class="footer-divider"></div>
+                                        <div class="site-footer"><p class="footer-top">질문이 있으신가요? 답변 페이지 아직 안만들었습니다.
+                                            <div class="lang-selection-container" id="lang-switcher">
+                                                <div data-uia="language-picker+container" class="ui-select-wrapper">
+                                                    <label
+                                                            for="lang-switcher-select" class="ui-label"><span
+                                                            class="ui-label-text">언어 선택</span></label>
+                                                    <div class="select-arrow medium prefix globe"><select
+                                                            data-uia="language-picker" class="ui-select medium"
+                                                            id="lang-switcher-select" tabindex="0"
+                                                            placeholder="lang-switcher">
+                                                        <option selected="" lang="ko" value="/kr/" data-language="ko"
+                                                                data-country="KR">한국어
+                                                        </option>
+                                                        <option lang="en" value="/kr-en/" data-language="en"
+                                                                data-country="KR">English
+                                                        </option>
+                                                    </select></div>
+                                                </div>
+                                            </div>
+                                            <p class="footer-country">사이트 이름 고민 중</p>
+                                            <div class="copy-text">
+                                                <div class="copy-text-block">대표: 김윤교</div>
+                                                <div class="copy-text-block">이메일 주소: code.sugartoast@gmail.com</div>
+                                                <div class="copy-text-block">주소: 대한민국 서울특별시
+                                                </div>
+                                                <div class="copy-text-block">조번호: sparta20</div>
+                                                <div class="copy-text-block">호스팅: 안함</div>
+                                                <div id="" class="copy-text-block" data-uia=""><a
+                                                        href="http://www.ftc.go.kr/bizCommPop.do?wrkr_no=1658700119">공정거래위원회
+                                                    웹사이트</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="center-pixel" style="position:absolute"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 
 </section>
 

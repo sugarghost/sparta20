@@ -1,20 +1,22 @@
-body{
-
+body {
+    /*
+    css 상으로 지정된 배경 비활성화
     background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/c16cf196-e89e-4c46-8cc7-f2eca6fb0762/891fc680-6d70-4a0a-9c4f-27243341799f/KR-ko-20220103-popsignuptwoweeks-perspective_alpha_website_small.jpg");
     background-repeat: repeat repeat;
     background-position: center;
     background-size: cover;
+     */
+    background-color: #000;
     width: 100%;
     height: 100%;
 }
 
-.logo img{
+.logo img {
     width: 100px;
     height: 88px;
-    margin: 20px 0px 0px 20px
 }
 
-.container{
+.container {
     width: 500px;
     /*margin: 20% auto auto auto;*/
     display: grid;
@@ -22,76 +24,88 @@ body{
 
     text-align: center;
 }
-h1{
+
+h1 {
     color: red;
     font-weight: bold;
 }
 
-#login-box{
+#login-box {
 
     /*margin: 20px auto;*/
     padding: 50px;
     border-radius: 5px;
 
 }
-#login-box .mb-3{
+
+#login-box .mb-3 {
     width: 300px;
-    margin:0 auto;
+    margin: 0 auto;
 
 }
-#login-box .mb-3 .register{
+
+#login-box .mb-3 .register {
     position: absolute;
     width: 200px;
 }
+
 #login-box #text-id .register {
     width: 110px;
-    transition: right,opacity .4s,.4s;
+    transition: right, opacity .4s, .4s;
     right: -10%;
     opacity: 0;
     pointer-events: none;
 }
 
 /*#login-box #text-id .register-id-btn:hover{*/
-#login-box #text-id{
+#login-box #text-id {
     position: relative;
 }
-#login-box #text-id  .registers{
+
+#login-box #text-id .registers {
     position: absolute;
     right: -3.5%;
     pointer-events: auto;
     opacity: 1;
 }
-#login-box #text-id .register>button {
+
+#login-box #text-id .register > button {
 
 }
-#login-box  button{
+
+#login-box button {
     margin: auto 10px auto;
     background-color: red;
 }
-#login-box .inner-btn .register{
+
+#login-box .inner-btn .register {
     transition: margin-top .4s;
     margin-top: -54px;
 }
 
-#login-box .inner-btn .registers{
+#login-box .inner-btn .registers {
     margin-top: 0px;
 }
-.register-id-btn{
+
+.register-id-btn {
     margin-top: -38px;
     /*margin-right: -110px;*/
     text-align: end;
     opacity: 1;
 }
-#pwCheck_input{
+
+#pwCheck_input {
     visibility: hidden;
     opacity: 0;
     transition: opacity .4s;
 
 }
+
 .registers #pwCheck_input {
     visibility: visible;
     opacity: 1;
 }
+
 /*.register-id-btn.show{*/
 /*    transform: translateX(110px) translateY(-38px);*/
 /*    text-align: end;*/
