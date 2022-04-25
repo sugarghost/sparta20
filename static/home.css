@@ -62,3 +62,7 @@ body{
     cursor: pointer;
     opacity: 1;
 }
+
+.search{
+    float: right;
+}

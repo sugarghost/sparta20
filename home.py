@@ -77,6 +77,31 @@ def read_movies():
         {'all_movies': movies, "fav": tmp}
     )
 
+# 모든 컨텐츠 디비에서 가져오고 즐겨찾기 인덱스 반환
+@home.route("/movie_search", methods=['POST'])
+def search_movies():
+    # 사용자 즐겨찾기 목록
+    id = GetJwtId()
+    dbid = db.User.find_one({'id': id})
+    fav = db.User.find_one({'id': dbid['id']})
+    searchTitle = request.form['searchTitle']
+
+    # 모든 영화 목록
+    movies = list(db.movie.find({'movie_title':searchTitle}, {'_id': False}))
+    # 일치하는지 확인 후 인덱스 배열 반환
+    fav_list = fav['fav']
+    title = []
+    tmp = []
+    # DB에 ID로 정렬이 안되어있어서 제목을 기반으로 배열을 만듬
+    for i in movies:
+        title.append(i['movie_title'])
+    # 만들어진 배열에서 즐겨찾기 된 제목을 기반으로 검색을 진행해 검색된 리스트를 새롭게 생성
+    for i in fav_list:
+        tmp.append(title.index(i))
+    # 검색된 영화 데이터와 즐겨찾기 데이터가 json으로 변환되어 전달됨
+    return jsonify(
+        {'all_movies': movies, "fav": tmp}
+    )
 
 # 사용자 즐겨찾기 목록 가져오기
 @home.route('/check_bookmark', methods=['GET'])
