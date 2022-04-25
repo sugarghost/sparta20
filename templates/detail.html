@@ -249,6 +249,7 @@
         });
     }
 
+    /*
     $("#reviews-box tr").click(function () {
         let tdArr = new Array();
         tdArr = [];
@@ -282,16 +283,51 @@
             }
         )
     })
+    */
+    $("#updateButton").click(function () {
+            let updateReview = $("#updateReviews").val();
+            let updateStarValue = $('input[name="starpoint"]:checked').val();
 
+            let tdArr = new Array();
+            tdArr = [];
+            let tr = $('#reviews-box .modify');
+            let td = tr.children();
+            td.each(function (i) {
+                tdArr.push(td.eq(i).text());
+            });
+
+            $.ajax({
+                type: "Put",
+                url: "/review",
+                data: {
+                    userid: tdArr[0],
+                    review: tdArr[1],
+                    starValue: tdArr[2],
+                    writeTime: tdArr[3],
+                    updateReview: updateReview,
+                    updateStarValue: updateStarValue
+                },
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload();
+                }
+            })
+        }
+    )
     $("#reviews-box tr td button:first-child").click(function () {
+        let tr = $(this).parent().parent();
         if ($(this).html() == '수정') {
             $("#updateReview").show();
             $("#makeReview").hide();
             $("html, body").animate({scrollTop: document.body.scrollHeight}, "slow");
+            $("#reviews-box tr").removeClass('modify');
+            $("#reviews-box tr td button").html('수정');
+            tr.addClass('modify');
             $(this).html('수정취소');
         } else {
             $("#updateReview").hide();
             $("#makeReview").show();
+            tr.removeClass('modify');
             $(this).html('수정');
         }
     })
